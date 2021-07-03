@@ -6,17 +6,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.irbish.pbscoreboard.models.User;
-import ru.irbish.pbscoreboard.repositories.UsersRepository;
+import ru.irbish.pbscoreboard.service.UserService;
 
 @Component(value = "customUserDetailService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = usersRepository.findByEmail(email);
+        User user = userService.getByEmail(email);
         if (user != null){
             return new UserDetailsImpl(user);
         } else {
