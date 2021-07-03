@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Set command to tournament</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container" align="center">
+<table width="775" table table-striped table-bordered table-info tableTab>
+    <tr>
+        <td align="left">
+            <h2 class="outline">Шаг 3. Добавьте команды участвующие в турнире</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form class="form-group" method="post" action="/auth/newTournament/setCommands" th:object="${idTeam}">
+                <table border = "0" width="775">
+                    <tr>
+                        <td>
+                            <select class="form-control" th:name="idTeam">
+                            <datalist idTeam="${team.id}">
+                                <option value="0" th:utext="${errorMessage}">  </option>
+                                <option th:each="team : ${teams}"
+                                        th:value="${team.id}"
+                                        th:utext="${team.name}"/>
+                            </datalist>
+                            </select>
+                        </td>
+                        <td width="150">
+                            <button class="btn btn-primary btn-block" type="submit">Внести в список</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="775" class="table-striped table-bordered table-info tableTab">
+                <tr>
+                    <td width="10" th:align="center">
+                         №
+                    </td>
+                    <td th:align="center">
+                        Команда
+                    </td>
+                    <td width="80"  th:align="center">
+                        Город
+                    </td>
+                    <td width="150" th:align="center">
+                        Действие
+                        </td>
+                </tr>
+                <tr th:each="team, iter : ${teamList}">
+                    <td th:text="${iter.count}">Id</td>
+                    <td th:text="${team.getName()}">Name</td>
+                    <td th:text="${team.getCity}">City</td>
+                    <td>
+                        <form th:action="@{/auth/newTournament/setCommands/{idTeam}(idTeam = ${team.getId()})}" th:method="delete">
+                            <button class="btn btn-primary btn-block" type="submit">Удалить из списка</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="775" class="table tableTab">
+                <tr>
+                    <td>
+
+                    </td>
+                    <td width="50" align = "right">
+                        <form method="post" action="/auth/newTournament/backForName">
+                            <button class="btn btn-primary" type="submit">Назад</button>
+                        </form>
+                    </td>
+                    <td width="50" align = "right">
+                        <form method="post" action="/auth/newTournament/createTeamsOfTournament">
+                            <button class="btn btn-primary btn-block" type="submit">Сохранить изменения</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container">
+    <form class="form-group hid" method="post" action="/auth/createNewTournament/setTournamentName" th:object="${tournamentName}">
+        <h2 class="outline">Шаг 1. Введите название турнира</h2>
+        <table border="0" width="900">
+            <tr>
+                <td>
+                    <label for="tournamentName" class="sr-only"></label>
+                    <input type="text" id="tournamentName" name="tournamentName" class="form-control" th:value="${tournamentName}" required autofocus>
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Запомнить название</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form class="form-group" method="post" action="/auth/createNewTournament" th:object="${id}">
+    <h2 class="form-signin-heading">Шаг 2. Добавьте команды участвующие в турнире</h2>
+    <table>
+            <tr>
+                    <td th:colspan="3">
+                        <select class="form-control" th:name="id">
+                            <datalist id="${team.id}">
+                                <option value="0"> Выберите команду </option>
+                                <option th:each="team : ${teams}"
+                                        th:value="${team.id}"
+                                        th:utext="${team.name}"/>
+                            </datalist>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-block" type="submit">Внести в список</button>
+                    </td>
+            </tr>
+        </table>
+    </form>
+        <table class="table table-striped table-bordered table-info tableTab">
+            <tr>
+                <td>
+                    №
+                </td>
+                <td>
+                    Команда
+                </td>
+                <td>
+                    Город
+                </td>
+                <td>
+                    Действие
+                </td>
+            </tr>
+            <tr th:each="team, iter : ${teamList}">
+                <td th:text="${iter.count}">Id</td>
+                <td th:text="${team.getName()}">Name</td>
+                <td th:text="${team.getCity}">City</td>
+                <td>
+                    <form th:action="@{/auth/createNewTournament/{id}(id = ${team.getId()})}" th:method="delete">
+                        <button class="btn btn-primary btn-block" type="submit">Удалить из списка</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    <form method="post" action="/auth/createNewTournament/createSchedule">
+        <h2 class="form-signin-heading">Шаг 3. Сгенерируйте расписание турнира</h2>
+        <button class="btn btn-primary" type="submit">Создать расписание</button>
+    </form>
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

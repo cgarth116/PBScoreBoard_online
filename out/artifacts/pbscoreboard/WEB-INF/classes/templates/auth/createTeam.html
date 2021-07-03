@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container" align="center">
+    <form class="form-group" method="post" action="/auth/createTeam" th:object="${team}">
+        <table th:border="0" th:width="900">
+            <tr>
+                <td colspan="3" align = "left">
+                    <h2 class="outline">Добавьте новую команду в базу</h2>
+                </td>
+            </tr>
+            <tr>
+                <td th:width="300" valign="middle">
+                    <input type="text" class="form-control" th:field="*{name}" th:placeholder="${errorMessage[2]}" required autofocus>
+                </td>
+                <td>
+                    <select class="form-control" th:field="*{city}">
+                        <datalist id="${team.city}">
+                            <option value=""> Выберите город </option>
+                            <option th:each="city : ${citys}"
+                                    th:value="${city}"
+                                    th:utext="${city}"/>
+                        </datalist>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-block" type="submit">Добавить</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Расписание турнира</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container" align="center">
+    <h2 class="outline">Расписание турнира</h2>
+    <h2 class="outline" th:text="${tournamentName}">Tournament Name</h2>
+    <form method="post" action="/auth/schedule">
+        <table th:marginwidth="auto">
+            <tr valign="top">
+                <td>
+                    <table width="310" class="table-striped table-bordered table-info tableTab">
+                        <tr>
+                            <td align="center" width="10">
+                                №
+                            </td>
+                            <td align="center" width="150">
+                                TeamA
+                            </td>
+                            <td align="center">
+                                TeamB
+                            </td>
+                        </tr>
+                        <tr th:each="schedule, iter : ${schedules}">
+                            <td align="center" th:text="${iter.count}">Id</td>
+                            <td align="center" th:text="${schedule.getTeamA()}">TeamA</td>
+                            <td align="center" th:text="${schedule.getTeamB()}">TeamB</td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="100">
+                </td>
+                <td valign="top">
+                    <table class="table-striped table-bordered table-info tableTab">
+                        <th:block th:each="group : ${groups}">
+                            <tr>
+                                <td>
+                                    Group:
+                                </td>
+                                <td align="center" th:text="${group}">Group</td>
+                            </tr>
+                            <th:block th:each="team: ${teams}" th:if="${team.getGroupName().equals(group)}">
+                            <tr>
+                                <td bgcolor="white" align="right" colspan="2" th:text="${team.getName()}">TeamA</td>
+                            </tr>
+                            </th:block>
+                        </th:block>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit"> В PDF формат для печати</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

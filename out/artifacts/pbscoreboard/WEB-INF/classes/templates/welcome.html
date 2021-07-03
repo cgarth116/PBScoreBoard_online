@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main page</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <div th:insert="~{fragments/header :: headerNoAuth}" th:if="${#authentication.getName().equals('anonymousUser')}"></div>
+    <div th:insert="~{fragments/header :: headerAuth}" th:unless="${#authentication.getName().equals('anonymousUser')}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+
+<div th:align="center">
+    <table th:width = "1700" border="0">
+        <tr th:width="1700" th:height="600">
+            <td th:width="300" th:align="left">
+                <img th:src="@{/images/local-prog.jpg}" th:height="300" th:width="300" alt="Programs"/>
+            </td>
+            <td th:width="50">
+
+            </td>
+            <td th:width="900" align="justify">
+                <h2 class="outline">
+                <p>Привет!</p>
+                <p>Это MVP версия online реализации PBScoreBoard.</p>
+                <p>На данный момент идет наполнение базы данных команд и участие комьюнити в этом процессе очень важно и ценно для нас.</p>
+                <p>После регистрации доступно наполнение базы команд, создание турнира(внесение команд, авто составление расписания).</p>
+                <p>По всем вопросам и с предлоениями - пишите на почту.</p>
+                </h2>
+            </td>
+            <td th:width="50">
+
+            </td>
+            <td th:width="300" th:align="right">
+                <img th:src="@{/images/tablo.jpg}" th:height="300" th:width="300" alt="Tablo"/>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

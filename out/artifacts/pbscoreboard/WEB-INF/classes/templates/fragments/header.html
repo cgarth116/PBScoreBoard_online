@@ -1,0 +1,105 @@
+
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="headerAuth">
+    <style>
+        .strokeMenu {
+            font: 4em Arial, sans-serif;
+            text-shadow: white 0 0 10px;
+            color: white;
+        }
+    </style>
+
+    <table width="100%" border = "0">
+        <tr bgcolor=#4169e1>
+            <td width = "20">
+
+            </td>
+            <td align="center" width="70">
+                <img th:src="@{/images/logo-sm.png}" width="50" alt="лого"/>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "50">
+                <a href="/welcome" class="strokeMenu" title="Welcome"><h6>Welcome</h6></a>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "110">
+                <a href="/auth/newTournament/setName/0" class="strokeMenu" title="Выход"><h6>Новый Турнир</h6></a>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "145">
+                <a href="/auth/createTeam" class="strokeMenu"><h6>Добавить команду</h6></a>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "135">
+                <a href="/auth/tournamentsList" class="strokeMenu"><h6>Список Турниров</h6></a>
+            </td>
+            <td>
+
+            </td>
+            <td align="center" width = "70">
+                <a href="/logout"><img th:src="@{/images/logout.png}" width = "50" alt="logout"/></a>
+            </td>
+            <td width = "20">
+
+            </td>
+        </tr>
+        <tr th:height="20" >
+            <td colspan="13">
+            </td>
+        </tr>
+    </table>
+</th:block>
+
+
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="headerNoAuth">
+    <style>
+        .strokeMenu {
+            font: 4em Arial, sans-serif;
+            text-shadow: white 0 0 10px;
+            color: white;
+        }
+    </style>
+
+    <table width="100%">
+        <tr bgcolor=#4169e1>
+            <td width = "20">
+
+            </td>
+            <td align="center" width="70">
+                <img th:src="@{/images/logo-sm.png}" width="50" alt="лого"/>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "50">
+                <a href="/welcome" class="strokeMenu" title="Welcome"><h6>Welcome</h6></a>
+            </td>
+            <td>
+
+            </td>
+            <td valign="middle" width = "40">
+                <a href="/authorization" class="strokeMenu"><h6>Вход</h6></a>
+            </td>
+            <td width = "20">
+
+            </td>
+            <td valign="middle" width = "70">
+                <a href="/signUp" class="strokeMenu"><h6>Регистрация</h6></a>
+            </td>
+            <td width = "20">
+
+            </td>
+        </tr>
+        <tr th:height="20">
+            <td colspan="9">
+            </td>
+        </tr>
+    </table>
+</th:block>

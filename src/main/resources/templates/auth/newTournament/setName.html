@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Set tournament Name</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container" align="center">
+    <form class="form-group hid" method="post" action="/auth/newTournament/setName" th:object="${tournament}">
+        <table border="0" width="775">
+            <tr>
+                <td align="left" colspan="3">
+                    <h2 class="outline">Шаг 1. Введите название турнира</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="text" class="form-control" th:field="*{name}" th:placeholder="${errorMessage[0]}" required autofocus>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h2 class="outline">Шаг 2. Выберите дату:</h2>
+                </td>
+            </tr>
+            <tr>
+                <td width="150">
+                    <label for="date" class="sr-only"></label>
+                    <input type="date" id="date" th:field="*{date}" name="calendar">
+                </td>
+                <td align="left" valign="middle" height="20">
+                    <div class="text-danger"  th:if="!${errorMessage[1].isBlank()}">
+                        <p th:text="${errorMessage[1]}"/>
+                    </div>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" colspan="3">
+                    <button class="btn btn-primary" type="submit">Далее</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>

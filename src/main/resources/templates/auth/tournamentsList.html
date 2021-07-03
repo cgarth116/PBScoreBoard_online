@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список турниров</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="/css/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+
+    <div th:insert="~{fragments/header :: headerAuth}"></div>
+</head>
+
+<body th:style="'background: url(/images/background.jpg) no-repeat center fixed;'">
+<div class="container" align="center">
+    <h2 class="outline">Cписок доступных мероприятий</h2>
+    <table width="910" class="table table-striped table-bordered table-info tableTab">
+        <tr>
+            <td align="center" width="10">
+                №
+            </td>
+            <td align="center" width="300">
+                Название турнира
+            </td>
+            <td align="center" width="150">
+                Дата
+            </td>
+            <td align="center" th:colspan="3" width="450">
+                Действие
+            </td>
+        </tr>
+        <tr th:each="tournament, iter : ${tournamentList}">
+            <td th:text="${iter.count}">Id</td>
+            <td th:text="${tournament.getName()}">Name</td>
+            <td th:text="${tournament.getDate()}">City</td>
+            <td width="150">
+                <form th:action="@{/auth/tournamentsList/edit/{id}(id = ${tournament.getId()})}" th:method="post">
+                    <button class="btn btn-primary btn-block" type="submit">Редактировать</button>
+                </form>
+            </td>
+            <td width="150">
+                <form th:action="@{/auth/tournamentsList/delete/{idTeam}(idTeam = ${tournament.getId()})}" th:method="delete">
+                    <button class="btn btn-primary btn-block" type="submit">Удалить</button>
+                </form>
+            </td>
+            <td width="150">
+                <form th:action="@{/auth/tournamentsList/schedule/{id}(id = ${tournament.getId})}" th:method="post">
+                    <button class="btn btn-primary btn-block" type="submit">Создать расписание</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+</body>
+<footer>
+    <div th:insert="~{fragments/footer :: footer}"></div>
+</footer>
+</html>
